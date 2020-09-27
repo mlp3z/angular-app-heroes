@@ -1,0 +1,85 @@
+
+<h1 class="animate__animated animate__pulse text-center">
+    <small> Heroe List </small>
+</h1>
+
+<hr>
+
+<div class="row">
+    <div class="col text-right">
+        <button class="btn btn-primary"
+            routerLink="/heroe/new"
+        >
+            <i class="fa fa-plus"></i>
+            add
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<table class="table table-hover mt-3 animate__animated animate__fadeIn"
+    *ngIf="!loading && listHeroes.length>0"
+>
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Power</th>
+            <th scope="col">State</th>
+            <th scope="col" class="text-center">Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let heroe of listHeroes; index as i">
+            <td> {{ (i+1) }} </td>
+            <td> {{ heroe.name }} </td>
+            <td> {{ heroe.power }} </td>
+            <td> 
+                <label *ngIf="heroe.state" class="badge badge-success"> lives </label>
+                <label *ngIf="!heroe.state" class="badge badge-danger"> dead </label>
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn btn-warning  mr-3 "
+                    [routerLink]="[ '/heroe' , heroe.id ]"
+                >
+                    <i class="fa fa-edit"></i>
+                    edit
+                </button>
+                <button type="button" class="btn btn-danger  "
+                    (click)="deleteHeroe(heroe , i)"
+                >
+                    <i class="fa fa-trash"></i>
+                    delete
+                </button>
+            </td>
+        </tr>
+        <tr>
+    </tbody>
+</table>
+
+
+
+<div class="animate__animated animate__fadeIn animate__faster"
+>
+
+    <div class="alert alert-info text-center mt-3  " 
+        *ngIf="loading"
+    >
+        <h5 class="alert-heading">loading...</h5>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+        <p class="mb-0">
+            please wait
+        </p>
+    </div>
+    
+    <div class="alert alert-warning text-center mt-3 " 
+        *ngIf="!loading && listHeroes.length===0"
+    >
+        <h5 class="alert-heading">no records</h5>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </div>
+
+</div>
+
+
