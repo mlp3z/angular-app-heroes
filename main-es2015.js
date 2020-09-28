@@ -727,8 +727,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeroesComponent", function() { return HeroesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/heroes.service */ "./src/app/services/heroes.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+
 
 
 
@@ -840,8 +842,9 @@ function HeroesComponent_div_13_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 class HeroesComponent {
-    constructor(heroesService) {
+    constructor(heroesService, toastr) {
         this.heroesService = heroesService;
+        this.toastr = toastr;
     }
     ngOnInit() {
         this.loadHeroes();
@@ -890,13 +893,22 @@ class HeroesComponent {
                 this.heroesService.deleteHeroe(heroe.id)
                     .subscribe(resp => {
                     // console.log(resp)
+                    this.toastr.error(`heroe ${heroe.name} has been deleted`, "Notification", {
+                        // progressBar: true,
+                        // timeOut: 0,
+                        closeButton: true,
+                        extendedTimeOut: 300,
+                        positionClass: 'toast-bottom-left'
+                        // positionClass: 'toast-bottom-full-width'
+                        // positionClass: 'toast-bottom-right'
+                    });
                 });
                 this.listHeroes.splice(inndexLocal, 1);
             }
         });
     }
 }
-HeroesComponent.ɵfac = function HeroesComponent_Factory(t) { return new (t || HeroesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"])); };
+HeroesComponent.ɵfac = function HeroesComponent_Factory(t) { return new (t || HeroesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"])); };
 HeroesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HeroesComponent, selectors: [["app-heroes"]], decls: 14, vars: 3, consts: [[1, "animate__animated", "animate__pulse", "text-center"], [1, "row"], [1, "col", "text-right"], ["routerLink", "/heroe/new", 1, "btn", "btn-primary"], [1, "fa", "fa-plus"], ["class", "table table-hover mt-3 animate__animated animate__fadeIn", 4, "ngIf"], [1, "animate__animated", "animate__fadeIn", "animate__faster"], ["class", "alert alert-info text-center mt-3  ", 4, "ngIf"], ["class", "alert alert-warning text-center mt-3 ", 4, "ngIf"], [1, "table", "table-hover", "mt-3", "animate__animated", "animate__fadeIn"], [1, "thead-dark"], ["scope", "col"], ["scope", "col", 1, "text-center"], [4, "ngFor", "ngForOf"], ["class", "badge badge-success", 4, "ngIf"], ["class", "badge badge-danger", 4, "ngIf"], [1, "text-center"], ["type", "button", 1, "btn", "btn-warning", "mr-3", 3, "routerLink"], [1, "fa", "fa-edit"], ["type", "button", 1, "btn", "btn-danger", 3, "click"], [1, "fa", "fa-trash"], [1, "badge", "badge-success"], [1, "badge", "badge-danger"], [1, "alert", "alert-info", "text-center", "mt-3"], [1, "alert-heading"], [1, "fa", "fa-sync-alt", "fa-spin", "fa-2x"], [1, "mb-0"], [1, "alert", "alert-warning", "text-center", "mt-3"], [1, "fa", "fa-exclamation", "fa-2x"]], template: function HeroesComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h1", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "small");
@@ -925,7 +937,7 @@ HeroesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.loading);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.loading && ctx.listHeroes.length === 0);
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLink"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], encapsulation: 2 });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"]], encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](HeroesComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -934,7 +946,7 @@ HeroesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
                 //   styleUrls: ['./heroes.component.css']
                 styles: []
             }]
-    }], function () { return [{ type: src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"] }]; }, null); })();
+    }], function () { return [{ type: src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"] }, { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"] }]; }, null); })();
 
 
 /***/ }),

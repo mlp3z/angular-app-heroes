@@ -1317,13 +1317,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ngx-toastr */
+    "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
@@ -1548,10 +1554,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     var HeroesComponent = /*#__PURE__*/function () {
-      function HeroesComponent(heroesService) {
+      function HeroesComponent(heroesService, toastr) {
         _classCallCheck(this, HeroesComponent);
 
         this.heroesService = heroesService;
+        this.toastr = toastr;
       }
 
       _createClass(HeroesComponent, [{
@@ -1602,7 +1609,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.heroesService.deleteConfirm(heroe).then(function (resp) {
             if (resp.value) {
-              _this5.heroesService.deleteHeroe(heroe.id).subscribe(function (resp) {// console.log(resp)
+              _this5.heroesService.deleteHeroe(heroe.id).subscribe(function (resp) {
+                // console.log(resp)
+                _this5.toastr.error("heroe ".concat(heroe.name, " has been deleted"), "Notification", {
+                  // progressBar: true,
+                  // timeOut: 0,
+                  closeButton: true,
+                  extendedTimeOut: 300,
+                  positionClass: 'toast-bottom-left' // positionClass: 'toast-bottom-full-width'
+                  // positionClass: 'toast-bottom-right'
+
+                });
               });
 
               _this5.listHeroes.splice(inndexLocal, 1);
@@ -1615,7 +1632,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     HeroesComponent.ɵfac = function HeroesComponent_Factory(t) {
-      return new (t || HeroesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"]));
+      return new (t || HeroesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"]));
     };
 
     HeroesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -1681,7 +1698,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.loading && ctx.listHeroes.length === 0);
         }
       },
-      directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLink"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]],
+      directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"]],
       encapsulation: 2
     });
     /*@__PURE__*/
@@ -1698,6 +1715,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }], function () {
         return [{
           type: src_app_services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"]
+        }, {
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"]
         }];
       }, null);
     })();
