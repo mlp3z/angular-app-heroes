@@ -1,5 +1,14 @@
 # HeroesApp
 
+
+```
+deploy
+
+ng build --base-href https://mlp3z.github.io/angular-app-heroes/
+ngh --dir dist/heroesApp
+
+```
+
 ```
 DEVSET 
 

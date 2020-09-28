@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { HeroeModel } from 'src/app/models/heroe.model';
 import { HeroesService } from 'src/app/services/heroes.service';
 import Swal from 'sweetalert2';
@@ -15,7 +16,8 @@ export class HeroesComponent implements OnInit {
     loading:boolean;
 
     constructor(
-        private heroesService: HeroesService
+        private heroesService: HeroesService,
+        private toastr: ToastrService
     ) { 
 
     }
@@ -76,6 +78,19 @@ export class HeroesComponent implements OnInit {
                     this.heroesService.deleteHeroe(heroe.id)
                         .subscribe( resp => {
                             // console.log(resp)
+                            this.toastr.error(
+                                `heroe ${ heroe.name } has been deleted`, 
+                                "Notification",
+                                {
+                                    // progressBar: true,
+                                    // timeOut: 0,
+                                    closeButton: true,
+                                    extendedTimeOut: 300,
+                                    positionClass: 'toast-bottom-left'
+                                    // positionClass: 'toast-bottom-full-width'
+                                    // positionClass: 'toast-bottom-right'
+                                }
+                            );
                         });
                     this.listHeroes.splice(inndexLocal,1);
 
